@@ -3,8 +3,9 @@ from sklearn.datasets import load_iris
 # http://scikit-learn.org/stable/datasets/
 import numpy as np
 from sklearn import tree
-import graphviz
+#import graphviz
 from sklearn.metrics import accuracy_score as acc_rate
+import matplotlib.pyplot as plt
 
 # use this line in terminal if graphviz does not work: conda install python-graphviz 
 
@@ -48,8 +49,11 @@ If this message appears:
 
 type the following in the console:
   conda install python-graphviz
+
+
+Sometime this method just doesn't work.
 '''
-dot_data = tree.export_graphviz(clf,
+'''dot_data = tree.export_graphviz(clf,
                                 out_file=None,
                                 feature_names=iris.feature_names,
                                 class_names=iris.target_names,
@@ -58,4 +62,9 @@ dot_data = tree.export_graphviz(clf,
                                 impurity=False,
                                 special_characters=True)
 graph = graphviz.Source(dot_data)
-graph.render("iris", view = True)
+graph.render("iris", view = True)'''
+#a safer method of matplotlib is provided here
+# visualizing tree
+fig, axes = plt.subplots(nrows=1,ncols=1,figsize=(4,4), dpi=300)
+tree.plot_tree(clf,feature_names=iris.feature_names,class_names=iris.target_names, filled=True)
+plt.show()
